@@ -21,10 +21,10 @@ $stopR = 0xCF; $stopG = 0x33; $stopB = 0x48   # red STOP button color
 $colTol        = 50
 $chargeHoldMs  = 1000      # F5/F6 adjust live
 $castAnimMs    = 1200
-$biteTimeoutMs = 40000
+$biteTimeoutMs = 12000     # starts here, then adapts to the longest bite seen (10-25 s)
 $reelClickGap  = 45
 $reelMaxMs     = 15000
-$afterReelMs   = 2500
+$afterReelMs   = 1500
 
 Add-Type -ReferencedAssemblies System.Drawing -TypeDefinition @"
 using System;
@@ -112,6 +112,7 @@ $script:quit = $false
 $script:casts = 0
 $script:lastBite = 0
 $script:lastReel = 0
+$script:maxBite = 0
 $script:prev = @{}
 
 function Edge($vk) {
@@ -189,8 +190,10 @@ function Fish-Cycle {
         Start-Sleep -Milliseconds 20
     }
     if (-not $script:running) { return }
-    if (-not $bit) { Write-Host "No bite, recasting" -ForegroundColor Yellow; [void](Wait-Ms 800); return }
+    if (-not $bit) { Write-Host "No bite, recasting" -ForegroundColor Yellow; return }
     $script:lastBite = $sw.ElapsedMilliseconds + $castAnimMs
+    $script:maxBite = [Math]::Max($script:maxBite, $script:lastBite)
+    $script:biteTimeoutMs = [Math]::Min(25000, [Math]::Max(10000, [int]($script:maxBite * 1.8)))
 
     # 3. spam click until the STOP button is gone (random length)
     [W]::MoveTo($g[0] + [int][Math]::Round($g[2] * $clickX), $g[1] + [int][Math]::Round($g[3] * $clickY))
