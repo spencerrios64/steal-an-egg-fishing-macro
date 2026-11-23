@@ -108,6 +108,10 @@ A fraction is the position divided by the window size. `0.5, 0.5` is the exact c
 - **The cursor does not move in Roblox:** run the script as administrator (right-click → Run as administrator) if Roblox is running as administrator.
 - **Different screen layout or game update:** the colors and positions were measured from recordings and may change. Adjust the settings above.
 
+## Updating
+
+Double-click **`update_fishing.bat`** (keep it in the same folder as the macro, and close the macro first). It downloads the latest `steal_an_egg_fishing.ahk`, `steal_an_egg_fishing.ps1`, `run_fishing.bat` and `README.md` from this repo and keeps your old copies as `*.bak`. Any settings you changed go back to the defaults, so copy them over from the `.bak` file if you want to keep them. GitHub can take a few minutes to serve a file that was just changed.
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
