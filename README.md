@@ -39,7 +39,7 @@ Differences from the AutoHotkey version:
 
 | Part | How it is handled |
 |---|---|
-| Bite wait | Detected: waits for the red STOP button (up to 40 s) |
+| Bite wait | Detected: waits for the red STOP button. The timeout starts at 12 s and adapts to the longest bite seen (10-25 s). If there is no bite it recasts immediately |
 | Reel length | Detected: clicks until the STOP button is gone |
 | Reward popup | Retried: if it casts too early, nothing happens and it retries |
 | Charge hold | **Fixed time** (default 1000 ms), because the bar fills in about 1 s every time. Tune with F5/F6 |
@@ -90,10 +90,10 @@ Open `steal_an_egg_fishing.ahk` in Notepad (right-click → Edit Script). The se
 | `colTol` | `50` | How much the color may differ (0–255). Raise it if the STOP button is missed, lower it if it reacts to other red things |
 | `chargeHoldMs` | `1000` | How long to hold the cast charge, in ms |
 | `castAnimMs` | `1200` | Pause after releasing the cast before looking for the bite |
-| `biteTimeoutMs` | `40000` | How long to wait for a bite before recasting |
+| `biteTimeoutMs` | `12000` | Starting time to wait for a bite before recasting immediately. It then adapts to 1.8x the longest bite seen (min 10 s, max 25 s) |
 | `reelClickGap` | `45` | Milliseconds between clicks while reeling. Lower is faster |
 | `reelMaxMs` | `15000` | Safety limit for the reel phase |
-| `afterReelMs` | `2500` | Wait after a catch for the reward popup before casting again |
+| `afterReelMs` | `1500` | Wait after a catch for the reward popup before casting again |
 
 ### Fraction coordinates
 
