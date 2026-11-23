@@ -2,6 +2,29 @@
 
 An auto-fishing macro for the **Alien Planet** fishing in the Roblox game *Steal An Egg*. It casts, releases the charge bar, waits for the bite, spam-clicks the "Click Fast!" / "Tap Fast!" reel, and repeats.
 
+## Two versions: pick one
+
+| Version | Files | Needs |
+|---|---|---|
+| **AutoHotkey** | `steal_an_egg_fishing.ahk` | AutoHotkey v2 installed (see [Install](#install)) |
+| **No install (PowerShell)** | `steal_an_egg_fishing.ps1` + `run_fishing.bat` | Nothing. PowerShell is built into Windows 10/11 |
+
+Both do exactly the same thing, use the same hotkeys and have the same settings. The rest of this README is written for the AutoHotkey version; the PowerShell differences are below.
+
+### No-install version (PowerShell)
+
+1. Download this repo (**Code → Download ZIP**) and extract it. Keep `run_fishing.bat` and `steal_an_egg_fishing.ps1` in the **same folder**.
+2. Double-click **`run_fishing.bat`**. A console window opens. **Keep it open** while fishing.
+3. Go to the fishing pier in Roblox, hover your mouse over the **"Hold to Cast"** prompt and press **`F4`**.
+4. Press **`F1`** to start and stop. **`F3`** quits. The hotkeys work while Roblox has focus.
+
+Differences from the AutoHotkey version:
+
+- Status messages (casts, bite wait, reel time, `F2` status) print in the console window instead of as tooltips.
+- Settings are the variables at the top of `steal_an_egg_fishing.ps1` (open it in Notepad). The names are the same but start with `$`, for example `$chargeHoldMs = 1000`. Save the file and run `run_fishing.bat` again to apply changes.
+- The STOP button color is split into three numbers: `$stopR`, `$stopG`, `$stopB` (default `0xCF`, `0x33`, `0x48`).
+- If Windows or your antivirus blocks the `.bat` file, right-click it and choose **Run anyway**, or open PowerShell in the folder and run `powershell -ExecutionPolicy Bypass -File .\steal_an_egg_fishing.ps1`.
+
 > **Not tested on a live Windows machine yet.** Built from screen recordings of the game. Expect to tune it (see [Changing settings](#changing-settings)). Roblox's rules prohibit cheating tools; a simple auto-clicker like this is a gray area. **Use at your own risk.**
 
 ## How the game's fishing works (what the macro automates)
